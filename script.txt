@@ -1,0 +1,100 @@
+create table Player(
+    Id int not null  GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    Nba int,
+    NamePlayer varchar(20),
+    LastnamePlayer VARCHAR(20) ,
+    RingsWon VARCHAR(50)
+);
+
+    
+
+
+create table Users(
+     Id int not null  GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    NameUser VARCHAR(50)not null, 
+    LastNameUser varchar(50)not null,
+    Email VARCHAR(50)not null
+
+);
+
+create table Equipment (
+    Id int not null  GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    SizeEquipment VARCHAR(50),
+    Color VARCHAR(50),
+    Player int,
+    Price decimal(18,2),
+    WeightOfEquipment VARCHAR(50),
+    TypeOfEquipment VARCHAR(50) 
+    
+    
+    
+);
+
+create table naruceni_proizvodi (
+    Id int not null  GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    Cart int,
+    Users int 
+    
+);
+
+
+    
+create table Cart(
+    Id int not null  GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    Equipment int ,
+    TotalWeight decimal(18,5),
+    TotalPrice decimal(18,5),
+    DateOfDelivery date,
+    NumberOfItems int
+
+
+);
+
+create table Nba(
+     Id int not null  GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    TeamName varchar(50),
+    Trener VARCHAR(50),
+    championshipsWon int,
+    Stadion VARCHAR(50)
+);
+
+
+
+alter table Player add foreign key (nba) references Nba(Id);
+
+alter table Cart add foreign key (Equipment) references Equipment(Id);
+
+alter table naruceni_proizvodi rename to ItemsOrderd;
+
+alter table ItemsOrderd add foreign key (Cart) references Cart(Id);
+
+alter table ItemsOrderd add foreign key (Users) references Users(Id);
+
+ALTER TABLE coupon add FOREIGN KEY(users) REFERENCES FK_coupon_users(Id);
+ALTER TABLE coupon add FOREIGN KEY(player) references id
+alter table coupon ADD COLUMN users int;
+
+
+create table Cart_Users (
+    Id int not null  GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    Cart int,
+    Users int 
+    
+);
+ALTER TABLE coupon DROP COLUMN users;
+ CONSTRAINT coupon FOREIGN KEY (player) REFERENCES player(id);
+
+
+alter table coupon (
+CONSTRAINT users
+);
+
+create table coupon (
+ PriceDiscount int,
+ couponValidation bool,
+ ExpireDate date
+);
+
+insert into nba(Id, TeamName, Trener, championshipsWon, Stadion)
+OVERRIDING SYSTEM VALUE
+values(null, 'La-Lakers', 'Rob Palinka', 15, 'Crypto-Center');
